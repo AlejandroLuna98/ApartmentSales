@@ -50,4 +50,8 @@
   .input {
     display: none;
   }
+  .summary {
+    top: 50%;
+    width: 25%;
+  }
 }

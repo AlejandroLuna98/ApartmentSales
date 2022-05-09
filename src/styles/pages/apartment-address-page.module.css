@@ -16,3 +16,9 @@
   background-color: rgb(255, 255, 255);
   border-radius: 0.8rem;
 }
+@media (min-width: 768px) {
+  .input {
+    width: 30%;
+    margin: 0 auto;
+  }
+}

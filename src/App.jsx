@@ -37,6 +37,13 @@ function App() {
     setButtonState(true);
   }, [currentStep, steps, setButtonState]);
 
+  useEffect(() => {
+    console.log(window.innerWidth > 768);
+    if (window.innerWidth > 768) {
+      setShowModal(true);
+    }
+  }, []);
+
   const components = {
     clientInfoPage: ClientInfoPage,
     validateEmailPage: ValidateEmailPage,

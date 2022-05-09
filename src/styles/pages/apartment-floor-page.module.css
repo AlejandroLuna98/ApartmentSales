@@ -19,3 +19,9 @@
 .error {
   color: red;
 }
+@media (min-width: 768px) {
+  .input {
+    width: 30%;
+    margin: 0 auto;
+  }
+}
