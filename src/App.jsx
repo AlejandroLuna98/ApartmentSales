@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import { useButtonContext } from './context/ButtonContext';
+import { useSummaryContext } from './context/SummaryContext';
 
 import {
   ApartmentAddressPage,
@@ -22,6 +23,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState({});
   const [nextPath, setNextPath] = useState({});
 
+  const { summaryState } = useSummaryContext();
   const { setButtonState } = useButtonContext();
 
   useEffect(() => {
@@ -80,10 +82,21 @@ function App() {
       );
     });
   };
-
   return (
     <BrowserRouter>
+      <div>
+        <p>Paso actual: {currentStep.step}</p>
+        <p>Pasos restantes: {steps.length - currentStep.step}</p>
+      </div>
+
       <Routes>{renderer()}</Routes>
+      <div>
+        <h2>Resumen</h2>
+        <p>Nombre: {summaryState.name}</p>
+        <p>Correo: {summaryState.email}</p>
+        <p>Dirección: {summaryState.address}</p>
+        <p>Piso: {summaryState.floor}</p>
+      </div>
     </BrowserRouter>
   );
 }
