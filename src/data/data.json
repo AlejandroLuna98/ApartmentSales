@@ -31,13 +31,6 @@
     {
       "initial": false,
       "step": 5,
-      "path": "caracteristicas",
-      "component": "apartmentFeaturePage",
-      "description": "Cuales de las siguientes caracteristicas tiene tu apartamento?"
-    },
-    {
-      "initial": false,
-      "step": 6,
       "path": "resumen",
       "component": "summary",
       "description": "lorem ipsom"
