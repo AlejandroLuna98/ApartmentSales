@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
+import { useSummaryContext } from '../context/SummaryContext';
 
 const ApartmentFloorPage = ({ nextButton }) => {
   const { setButtonState } = useButtonContext();
+  const { summaryState, setSummaryState } = useSummaryContext();
   const [floorValue, setFloorValue] = useState('');
 
   const showError = useCallback(() => {
@@ -23,6 +25,13 @@ const ApartmentFloorPage = ({ nextButton }) => {
     return setButtonState(false);
   }, [floorValue, setButtonState]);
 
+  const handleOnblur = (e) => {
+    if (e) {
+      setSummaryState({ ...summaryState, floor: floorValue });
+      return;
+    }
+    return;
+  };
   return (
     <section>
       <h1>Dirección</h1>
@@ -32,6 +41,7 @@ const ApartmentFloorPage = ({ nextButton }) => {
         max={50}
         min={1}
         value={floorValue}
+        onBlur={handleOnblur}
         onChange={handleOnchange}
       />
       {floorValue < 1 || floorValue > 50 ? showError() : <></>}

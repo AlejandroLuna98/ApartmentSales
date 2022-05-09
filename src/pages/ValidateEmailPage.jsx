@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
+import { useSummaryContext } from '../context/SummaryContext';
 
 const ValidateEmailPage = ({ nextButton }) => {
   const { setButtonState } = useButtonContext();
+  const { summaryState, setSummaryState } = useSummaryContext();
   const [emailValue, setEmailValue] = useState('');
 
   const validateEmail = useCallback(
@@ -24,11 +26,20 @@ const ValidateEmailPage = ({ nextButton }) => {
     [validateEmail]
   );
 
+  const handleOnblur = (e) => {
+    if (e) {
+      setSummaryState({ ...summaryState, email: emailValue });
+      return;
+    }
+    return;
+  };
+
   return (
     <section>
       <h1>Correo Electronico</h1>
       <p>Ingresa tu email para ponernos en contacto contigo</p>
       <input
+        onBlur={handleOnblur}
         type="email"
         value={emailValue}
         onChange={handleOnchange}

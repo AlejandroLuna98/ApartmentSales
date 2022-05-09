@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
+import { useSummaryContext } from '../context/SummaryContext';
 
 const ApartmentAddressPage = ({ nextButton }) => {
   const { setButtonState } = useButtonContext();
+  const { summaryState, setSummaryState } = useSummaryContext();
   const [addressValue, setAddressValue] = useState('');
 
   const validateAddress = useCallback(
@@ -26,6 +28,14 @@ const ApartmentAddressPage = ({ nextButton }) => {
     [validateAddress]
   );
 
+  const handleOnblur = (e) => {
+    if (e) {
+      setSummaryState({ ...summaryState, address: addressValue });
+      return;
+    }
+    return;
+  };
+
   return (
     <section>
       <h1>Dirección</h1>
@@ -33,6 +43,7 @@ const ApartmentAddressPage = ({ nextButton }) => {
       <input
         type="text"
         value={addressValue}
+        onBlur={handleOnblur}
         onChange={handleOnchange}
         placeholder="Dirección"
       />
