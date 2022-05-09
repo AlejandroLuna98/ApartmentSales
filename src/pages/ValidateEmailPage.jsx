@@ -1,12 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
 import { useSummaryContext } from '../context/SummaryContext';
+import style from '../styles/pages/validate-email-page.module.css';
 
-const ValidateEmailPage = ({ nextButton }) => {
+const ValidateEmailPage = ({ props, nextButton }) => {
   const { setButtonState } = useButtonContext();
   const { summaryState, setSummaryState } = useSummaryContext();
   const [emailValue, setEmailValue] = useState('');
 
+  const description = useMemo(
+    () => props.description ?? '',
+    [props.description]
+  );
   const validateEmail = useCallback(
     (v) => {
       if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)) {
@@ -35,10 +40,11 @@ const ValidateEmailPage = ({ nextButton }) => {
   };
 
   return (
-    <section>
+    <section className={style.container}>
       <h1>Correo Electronico</h1>
-      <p>Ingresa tu email para ponernos en contacto contigo</p>
+      <p>{description}</p>
       <input
+        className={style.input}
         onBlur={handleOnblur}
         type="email"
         value={emailValue}

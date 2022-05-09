@@ -1,28 +1,25 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
-import './App.css';
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
+import data from './data/data.json';
 import { useButtonContext } from './context/ButtonContext';
 import { useSummaryContext } from './context/SummaryContext';
-
 import {
   ApartmentAddressPage,
-  ApartmentFeaturePage,
   ApartmentFloorPage,
   ClientInfoPage,
-  SummaryPage,
   ValidateEmailPage,
 } from './pages';
-
-import data from './data/data.json';
 import { Stepper } from './components';
+import style from './styles/app.module.css';
 
 function App() {
   const [steps] = useState(data.steps || null);
   const [currentStep, setCurrentStep] = useState({});
   const [nextPath, setNextPath] = useState({});
-
+  const [showModal, setShowModal] = useState(false);
   const { summaryState } = useSummaryContext();
   const { setButtonState } = useButtonContext();
 
@@ -35,6 +32,7 @@ function App() {
   useEffect(() => {
     const nextStep =
       steps.find((item) => item.step === currentStep.step + 1) || currentStep;
+
     setNextPath(nextStep);
     setButtonState(true);
   }, [currentStep, steps, setButtonState]);
@@ -44,14 +42,12 @@ function App() {
     validateEmailPage: ValidateEmailPage,
     apartmentAddressPage: ApartmentAddressPage,
     apartmentFloorPage: ApartmentFloorPage,
-    apartmentFeaturePage: ApartmentFeaturePage,
-    summary: SummaryPage,
   };
   const handleNextStep = (nextStep) => {
     setCurrentStep(steps.find((item) => item.step === nextStep.step));
   };
 
-  const renderer = (config) => {
+  const renderer = () => {
     if (!steps) return <> </>;
 
     return steps.map((step) => {
@@ -82,20 +78,54 @@ function App() {
       );
     });
   };
+
+  const handleModal = () => {
+    setShowModal((s) => !s);
+  };
+
+  const summary = () => {
+    return (
+      <div className={style.summary}>
+        <h2 className={style.title}>Resumen</h2>
+        <p>
+          Nombre: <span className={style.text}>{summaryState.name}</span>
+        </p>
+        <p>
+          Correo: <span className={style.text}>{summaryState.email}</span>
+        </p>
+        <p>
+          Dirección: <span className={style.text}>{summaryState.address}</span>
+        </p>
+        <p>
+          Piso: <span className={style.text}>{summaryState.floor}</span>
+        </p>
+        <button className={style.input} onClick={handleModal}>
+          Cerrar
+        </button>
+      </div>
+    );
+  };
   return (
     <BrowserRouter>
       <div>
-        <p>Paso actual: {currentStep.step}</p>
-        <p>Pasos restantes: {steps.length - currentStep.step}</p>
-      </div>
-
-      <Routes>{renderer()}</Routes>
-      <div>
-        <h2>Resumen</h2>
-        <p>Nombre: {summaryState.name}</p>
-        <p>Correo: {summaryState.email}</p>
-        <p>Dirección: {summaryState.address}</p>
-        <p>Piso: {summaryState.floor}</p>
+        <header className={style.header}>
+          <p>
+            Paso actual: <span className={style.span}>{currentStep.step}</span>
+          </p>
+          <p>
+            Pasos restantes:
+            <span className={style.span}>
+              {steps.length - currentStep.step}
+            </span>
+          </p>
+        </header>
+        <main className={style.content}>
+          <Routes>{renderer()}</Routes>
+        </main>
+        <button className={style.input} onClick={handleModal}>
+          Resumen
+        </button>
+        {showModal ? summary() : <></>}
       </div>
     </BrowserRouter>
   );

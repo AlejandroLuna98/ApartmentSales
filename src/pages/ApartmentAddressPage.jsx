@@ -1,11 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
 import { useSummaryContext } from '../context/SummaryContext';
-
-const ApartmentAddressPage = ({ nextButton }) => {
+import style from '../styles/pages/apartment-address-page.module.css';
+const ApartmentAddressPage = ({ props, nextButton }) => {
   const { setButtonState } = useButtonContext();
   const { summaryState, setSummaryState } = useSummaryContext();
   const [addressValue, setAddressValue] = useState('');
+
+  const description = useMemo(
+    () => props.description ?? '',
+    [props.description]
+  );
 
   const validateAddress = useCallback(
     (v) => {
@@ -37,10 +42,11 @@ const ApartmentAddressPage = ({ nextButton }) => {
   };
 
   return (
-    <section>
+    <section className={style.container}>
       <h1>Dirección</h1>
-      <p>Ingresa la dirección del inmueble</p>
+      <p>{description}</p>
       <input
+        className={style.input}
         type="text"
         value={addressValue}
         onBlur={handleOnblur}

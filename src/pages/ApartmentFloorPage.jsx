@@ -1,15 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
 import { useSummaryContext } from '../context/SummaryContext';
+import style from '../styles/pages/apartment-floor-page.module.css';
 
-const ApartmentFloorPage = ({ nextButton }) => {
+const ApartmentFloorPage = ({ props, nextButton }) => {
   const { setButtonState } = useButtonContext();
   const { summaryState, setSummaryState } = useSummaryContext();
   const [floorValue, setFloorValue] = useState('');
 
+  const description = useMemo(
+    () => props.description ?? '',
+    [props.description]
+  );
+
   const showError = useCallback(() => {
     if (!floorValue) return;
-    return <p>Debes ingresar un valor valido</p>;
+    return <p className={style.error}>Debes ingresar un valor valido</p>;
   }, [floorValue]);
 
   const handleOnchange = useCallback((e) => {
@@ -33,10 +39,11 @@ const ApartmentFloorPage = ({ nextButton }) => {
     return;
   };
   return (
-    <section>
-      <h1>Dirección</h1>
-      <p>En que piso esta tu inmueble?</p>
+    <section className={style.container}>
+      <h1>Piso</h1>
+      <p>{description}</p>
       <input
+        className={style.input}
         type="number"
         max={50}
         min={1}

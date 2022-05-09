@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useButtonContext } from '../context/ButtonContext';
 import { useSummaryContext } from '../context/SummaryContext';
-
-const ClientInfoPage = ({ nextButton }) => {
+import style from '../styles/pages/client-info-page.module.css';
+const ClientInfoPage = ({ props, nextButton }) => {
   const { setButtonState } = useButtonContext();
   const { setSummaryState } = useSummaryContext();
   const [username, setUsername] = useState('');
 
+  const description = useMemo(
+    () => props.description ?? '',
+    [props.description]
+  );
   const validateUsername = (v) => {
     const regex = /^[a-zA-Z_ ]*$/;
     if (v && regex.test(v)) {
@@ -31,17 +35,16 @@ const ClientInfoPage = ({ nextButton }) => {
   };
 
   return (
-    <section>
+    <section className={style.container}>
       <h1>Bienvenido</h1>
-      <p>
-        Vamos a registrar tu inmueble, por favor ingresa tu nombre y apellido
-      </p>
+      <p>{description}</p>
       <input
         onBlur={handleOnblur}
         type="text"
         value={username}
         onChange={handleUsername}
         placeholder="Nombre y apellido"
+        className={style.input}
       />
       {nextButton}
     </section>

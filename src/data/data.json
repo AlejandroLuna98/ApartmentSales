@@ -27,13 +27,6 @@
       "path": "piso",
       "component": "apartmentFloorPage",
       "description": "En que piso esta ubicado tu inmueble?"
-    },
-    {
-      "initial": false,
-      "step": 5,
-      "path": "resumen",
-      "component": "summary",
-      "description": "lorem ipsom"
     }
   ]
 }
