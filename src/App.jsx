@@ -38,7 +38,6 @@ function App() {
   }, [currentStep, steps, setButtonState]);
 
   useEffect(() => {
-    console.log(window.innerWidth > 768);
     if (window.innerWidth > 768) {
       setShowModal(true);
     }
