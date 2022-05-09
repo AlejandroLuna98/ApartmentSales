@@ -47,6 +47,10 @@
   font-weight: 400;
 }
 @media (min-width: 768px) {
+  .header {
+    justify-content: center;
+    column-gap: 6rem;
+  }
   .input {
     display: none;
   }
