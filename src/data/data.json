@@ -1,0 +1,46 @@
+{
+  "steps": [
+    {
+      "initial": true,
+      "step": 1,
+      "path": "datos-cliente",
+      "component": "clientInfoPage",
+      "description": "Para empezar por favor ingresa tu nombre y apellido"
+    },
+    {
+      "initial": false,
+      "step": 2,
+      "path": "validacion-correo",
+      "component": "validateEmailPage",
+      "description": "Cual es tu correo para poder contactarnos contigo?"
+    },
+    {
+      "initial": false,
+      "step": 3,
+      "path": "direccion",
+      "component": "apartmentAddressPage",
+      "description": "Cual es la dirección del inmueble?"
+    },
+    {
+      "initial": false,
+      "step": 4,
+      "path": "piso",
+      "component": "apartmentFloorPage",
+      "description": "En que piso esta ubicado tu inmueble?"
+    },
+    {
+      "initial": false,
+      "step": 5,
+      "path": "caracteristicas",
+      "component": "apartmentFeaturePage",
+      "description": "Cuales de las siguientes caracteristicas tiene tu apartamento?"
+    },
+    {
+      "initial": false,
+      "step": 6,
+      "path": "resumen",
+      "component": "summary",
+      "description": "lorem ipsom"
+    }
+  ]
+}
