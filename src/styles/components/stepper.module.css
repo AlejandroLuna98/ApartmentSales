@@ -1,0 +1,32 @@
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(99, 1, 204);
+  width: 19.25rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-size: 2rem;
+  line-height: 1.125rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  border: none;
+}
+.disable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  width: 19.25rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  color: rgb(255, 255, 255);
+  font-size: 2rem;
+  line-height: 1.125rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  border: none;
+}
